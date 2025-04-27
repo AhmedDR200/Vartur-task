@@ -8,7 +8,7 @@ export async function login(
   try {
     const result = await authService.login(req.body.username, req.body.password, req.server);
     return reply.send(result);
-  } catch (error) {
+  } catch (error: any) {
     return reply.code(401).send({ message: error.message });
   }
 } 

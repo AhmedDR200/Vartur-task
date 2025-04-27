@@ -9,6 +9,7 @@ COPY package*.json ./
 COPY prisma ./prisma/
 
 RUN npm install
+RUN npm install -g ts-node
 
 COPY . .
 
@@ -16,4 +17,4 @@ RUN npm run prisma:generate
 RUN npm run build
 
 # Wait for database to be ready and run migrations
-CMD sh -c 'npm run prisma:migrate && npm start' 
+CMD sh -c "npm run prisma:migrate && npm run prisma:seed && npm start" 

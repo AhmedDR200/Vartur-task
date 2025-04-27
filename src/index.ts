@@ -18,14 +18,16 @@ server.register(prismaPlugin);
 server.register(fastifyJwt, { secret: process.env.JWT_SECRET || 'your-secret-key' });
 server.register(fastifyRedis, { host: process.env.REDIS_HOST || 'localhost' });
 
-// Register routes
+// Register public routes (no auth required)
 server.register(authRoutes, { prefix: '/api' });
 
-// Protected routes
-server.addHook('preHandler', authHook);
-server.register(userRoutes, { prefix: '/api' });
-server.register(categoryRoutes, { prefix: '/api' });
-server.register(productRoutes, { prefix: '/api' });
+// Register protected routes with auth hook
+server.register(async (fastify) => {
+  fastify.addHook('preHandler', authHook);
+  fastify.register(userRoutes, { prefix: '/api' });
+  fastify.register(categoryRoutes, { prefix: '/api' });
+  fastify.register(productRoutes, { prefix: '/api' });
+});
 
 const start = async () => {
   try {

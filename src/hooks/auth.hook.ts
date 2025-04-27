@@ -2,6 +2,11 @@ import { FastifyRequest, FastifyReply } from 'fastify';
 import * as authService from '../services/auth.service';
 
 export async function authHook(request: FastifyRequest, reply: FastifyReply) {
+  // Skip authentication for login route
+  if (request.url === '/api/auth/login' && request.method === 'POST') {
+    return;
+  }
+
   try {
     const authHeader = request.headers.authorization;
     if (!authHeader) {
