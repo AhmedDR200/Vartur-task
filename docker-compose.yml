@@ -6,7 +6,7 @@ services:
     ports:
       - "3000:3000"
     environment:
-      - DATABASE_URL=mysql://root:root@db:3306/ecommerce
+      - DATABASE_URL=mysql://root:root@db:3306/vartur_task
       - REDIS_HOST=redis
       - JWT_SECRET=your-secret-key
     depends_on:
@@ -23,7 +23,7 @@ services:
       - "3306:3306"
     environment:
       - MYSQL_ROOT_PASSWORD=root
-      - MYSQL_DATABASE=ecommerce
+      - MYSQL_DATABASE=vartur_task
     volumes:
       - mysql_data:/var/lib/mysql
     healthcheck:

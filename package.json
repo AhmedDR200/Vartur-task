@@ -1,7 +1,7 @@
 {
-  "name": "e-commerce-api",
+  "name": "task",
   "version": "1.0.0",
-  "description": "A RESTful API for e-commerce platform with user management, product catalog, and category management",
+  "description": "",
   "license": "ISC",
   "author": "Ahmed Magdy",
   "type": "commonjs",

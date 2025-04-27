@@ -10,10 +10,14 @@ import fastifyJwt from '@fastify/jwt';
 import fastifyRedis from 'fastify-redis';
 import fastifySwagger from '@fastify/swagger';
 import fastifySwaggerUi from '@fastify/swagger-ui';
+import { errorHandler } from './utils/errors';
 
 dotenv.config();
 
 const server = Fastify({ logger: true });
+
+// Set error handler
+server.setErrorHandler(errorHandler);
 
 // Register Swagger
 server.register(fastifySwagger, {
