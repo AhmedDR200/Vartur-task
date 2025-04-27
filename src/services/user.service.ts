@@ -8,9 +8,7 @@ export async function findAll() {
     select: {
       id: true,
       username: true,
-      role: true,
-      createdAt: true,
-      updatedAt: true
+      role: true
     }
   });
 }
@@ -21,9 +19,7 @@ export async function findById(id: number) {
     select: {
       id: true,
       username: true,
-      role: true,
-      createdAt: true,
-      updatedAt: true
+      role: true
     }
   });
 
@@ -46,9 +42,7 @@ export async function create(data: { username: string; password: string; role?: 
     select: {
       id: true,
       username: true,
-      role: true,
-      createdAt: true,
-      updatedAt: true
+      role: true
     }
   });
 }
@@ -67,9 +61,7 @@ export async function update(id: number, data: { username?: string; password?: s
       select: {
         id: true,
         username: true,
-        role: true,
-        createdAt: true,
-        updatedAt: true
+        role: true
       }
     });
   } catch (error) {

@@ -8,10 +8,46 @@ import authRoutes from './routes/auth.routes';
 import { authHook } from './hooks/auth.hook';
 import fastifyJwt from '@fastify/jwt';
 import fastifyRedis from 'fastify-redis';
+import fastifySwagger from '@fastify/swagger';
+import fastifySwaggerUi from '@fastify/swagger-ui';
 
 dotenv.config();
 
 const server = Fastify({ logger: true });
+
+// Register Swagger
+server.register(fastifySwagger, {
+  openapi: {
+    info: {
+      title: 'E-Commerce API',
+      description: 'API documentation for E-Commerce System with user management, product catalog, and category management',
+      version: '1.0.0'
+    },
+    servers: [
+      {
+        url: `http://localhost:${process.env.PORT || 3000}`,
+        description: 'Development server'
+      }
+    ],
+    components: {
+      securitySchemes: {
+        bearerAuth: {
+          type: 'http',
+          scheme: 'bearer',
+          bearerFormat: 'JWT'
+        }
+      }
+    }
+  }
+});
+
+server.register(fastifySwaggerUi, {
+  routePrefix: '/documentation',
+  uiConfig: {
+    docExpansion: 'full',
+    deepLinking: false
+  }
+});
 
 // Register plugins
 server.register(prismaPlugin);
@@ -34,6 +70,7 @@ const start = async () => {
     await server.listen({ port: Number(process.env.PORT), host: '0.0.0.0' });
     const address = server.server.address();
     console.log(`Server listening on ${typeof address === 'string' ? address : address?.port}`);
+    console.log(`Swagger documentation available at http://localhost:${process.env.PORT || 3000}/documentation`);
   } catch (err) {
     server.log.error(err);
     process.exit(1);
