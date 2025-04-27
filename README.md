@@ -92,6 +92,21 @@ A robust, scalable, and secure RESTful API for e-commerce platforms built with F
    - MySQL: localhost:3306
    - Redis: localhost:6380
 
+## 📦 Docker Hub Deployment
+
+The application is available as a Docker image on Docker Hub. You can pull and run it using:
+
+```bash
+# Pull the latest image
+docker pull ahmedmagdy007/vartur-task:latest
+
+# Run the container
+docker run -p 3000:3000 ahmedmagdy007/vartur-task:latest
+```
+
+The image is automatically built and pushed to Docker Hub with each release. You can find the repository at:
+https://hub.docker.com/r/ahmedmagdy007/vartur-task
+
 ## 📚 API Documentation
 
 The API documentation is available at `/documentation` when the server is running. It includes:
